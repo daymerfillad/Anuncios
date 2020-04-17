@@ -1,0 +1,10 @@
+<form style="margin-bottom: 0" action="{{path('anuncios_buscar')}}" method="post">
+    <input name="buscar" type="text" class="span8" placeholder="Buscar..." style="border-radius: 4px 0 0 4px; position: relative; z-index: 2;">                        
+    <select name="categoria" class="span3" style="margin-left: -5px; border-radius: 0 4px 4px 0">
+        <option value="todas">Todas</option>            
+        {%for categoria in categorias%}
+            <option value="{{categoria.slug}}">{{categoria.categoria}}</option>            
+        {%endfor%} 
+    </select>
+    <input class="btn btn-primary" type="submit" style="margin-bottom: 10px;" value="Buscar">
+</form>

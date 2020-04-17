@@ -1,0 +1,38 @@
+{%extends 'FrontendBundle::layout.html.twig'%}
+{%block minicio 'class="active"'%}
+{%block contenido%}
+    {{ render (controller('FrontendBundle:Anuncios:formBuscarConCategoria'))}}
+    {%for categoriaA in categoriaAnuncios%}
+        <div class="row-fluid">
+            <div class="alert alert-info" style="margin-top: 20px">
+                <strong>{{categoriaA[0].categoria.categoria}}</strong>                            
+            </div>
+            {%for anuncio in categoriaA%}
+                {%if loop.index<3%}
+                    <div class="row-fluid">
+                        <div class="span2" style="text-align: center">
+                           <img src="{{asset('bundles/frontend/img/anuncios/')}}{{(anuncio.imagenes|length>0) ? anuncio.imagenes[0].imagen:'sin-img.png'}}" style="height: 80px; width: 80px">
+                        </div>
+                        <div class="span9">
+                            <a title="{{anuncio.asunto}}" href="{{path('anuncio_detalles', {'slugCategoria': anuncio.categoria.slug,'slugAnuncio':anuncio.slug})}}"><strong>{{anuncio.asunto|truncate(55,false,'...')}}</strong></a>
+                            <strong style="float: right; font-size: 11px">{{anuncio.fecha|localizeddate('full')}}</strong>
+                            <p>{{anuncio.descripcion?anuncio.descripcion|truncate(250,true,'...'):'Este anuncio no contiene ninguna descripción.'}}</p>
+                        </div>
+                        <div class="span1">
+                           <strong style="color: red">{{anuncio.precio}} {{anuncio.moneda}}</strong>
+                        </div>                        
+                        {% if loop.index < 2 and categoriaA|length > 1 %}
+                            <hr style="margin: 2px 0 -8px" class="span12">
+                        {%endif%}
+                    </div>
+                {%endif%}
+            {%endfor%}
+        </div>
+    {%endfor%}
+{%endblock%}
+{%block javascripts%}
+    {{parent()}}
+    <script>        
+        $('.span9 a').tooltip();
+    </script>
+{%endblock%}

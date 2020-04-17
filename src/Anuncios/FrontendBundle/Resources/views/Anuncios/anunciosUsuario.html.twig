@@ -1,0 +1,35 @@
+{%extends 'FrontendBundle::layoutAdmin.html.twig'%}   
+{%block contenido%}
+    <a href="{{path('anuncio_nuevo')}}" class="btn btn-small btn-primary">Nuevo anuncio</a>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Categoría</th>
+                <th>Asunto</th>
+                <th>Precio</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for anuncio in anuncios%}
+                <tr>                    
+                    <td><img src="{{asset('bundles/frontend/img/anuncios/')}}{{(anuncio.imagenes|length>0) ? anuncio.imagenes[0].imagen:'sin-img.png'}}" style="height: 80px; width: 80px"></td>
+                    <td>{{anuncio.categoria.categoria}}</td>
+                    <td>{{anuncio.asunto}}</td>
+                    <td>{{anuncio.precio ~ anuncio.moneda}}</td>
+                    <td>
+                        <a href="{{path('anuncio_editar',{'slugAnuncio':anuncio.slug})}}" title="Editar" class="icon-edit"></a>
+                        <a href="{{path('anuncio_eliminar',{'slugAnuncio':anuncio.slug})}}" title="Eliminar" class="icon-trash"></a>    
+                    </td>
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+{%endblock%}
+{%block javascripts%}
+    {{parent()}}
+    <script>
+        $('td a').tooltip();        
+    </script>
+{%endblock%}

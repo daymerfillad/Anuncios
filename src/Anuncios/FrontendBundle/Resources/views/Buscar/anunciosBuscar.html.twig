@@ -1,0 +1,20 @@
+{%extends 'FrontendBundle::layout.html.twig'%}
+{%block contenido%} 
+    {{ render (controller('FrontendBundle:Anuncios:formBuscarConCategoria'))}}
+    {%for anuncio in anuncios%}
+        <div class="row-fluid">
+            <div class="span2" style="text-align: center">
+                <img src="{{asset('bundles/frontend/img/anuncios/')}}{{(anuncio.imagenes|length>0) ? anuncio.imagenes[0].imagen:'sin-img.png'}}" style="height: 80px; width: 80px">
+            </div>
+            <div class="span9">
+                <a href="{{path('anuncio_detalles', {'slugCategoria': anuncio.categoria.slug,'slugAnuncio':anuncio.slug})}}">{{anuncio.asunto}}</a>
+                <span style="float: right">{{anuncio.fecha|date('d/m/Y g:i a')}}</span>
+                <p>{{anuncio.descripcion|truncate(250,true,'...')}}</p>
+            </div>
+            <div class="span1">
+                <strong style="color: red">{{anuncio.precio}} {{anuncio.moneda}}</strong>
+            </div>
+            <hr style="margin: 2px 0 -8px" class="span12">
+        </div>                   
+    {%endfor%}
+{%endblock%}

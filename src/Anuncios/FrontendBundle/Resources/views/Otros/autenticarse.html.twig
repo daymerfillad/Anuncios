@@ -1,0 +1,8 @@
+{%extends 'FrontendBundle::layout.html.twig'%}
+{%block contenido%}
+    {%if error.message is defined%}
+        {{error.message|trans}}
+    {%else%} 
+        <p>Para poder acceder a la dirección solicitada debe de autenticarse en la parte <strong style="color: red;">superior derecha</strong>.</p>
+    {%endif%}        
+{%endblock%}

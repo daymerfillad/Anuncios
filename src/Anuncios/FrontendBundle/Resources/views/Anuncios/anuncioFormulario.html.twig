@@ -1,0 +1,115 @@
+{%extends 'FrontendBundle::layoutAdmin.html.twig'%}   
+{% block stylesheets %}
+    {{parent()}}
+    <link href="{{asset('bundles/frontend/css/bootstrap-fileupload.min.css')}}" type="text/css" rel="stylesheet"/> 
+    <style>        
+        span ul{
+            margin: 0 0 0 15px;
+        }
+        #img-error span ul li{
+            float: left;
+            padding-right: 25px
+        }
+        #img-error span ul li:last-child{            
+            padding-right: 15px
+        }s
+    </style>
+{%endblock%}
+{%block contenido%}
+    <form action="{{ accion == 'Nuevo' ? path('anuncio_nuevo') : path('anuncio_editar', {'slugAnuncio': slug}) }}" method="post" {{ form_enctype(formulario) }} >    
+        <div class="row-fluid">
+            <div class="span3">                
+                {{ form_label(formulario.categoria) }}
+                {{ form_widget(formulario.categoria,{ 'attr': { 'style': 'height: auto; padding: 7px 9px; font-size: 16px;', 'class': 'span12' } })}}                       
+                {%if form_errors(formulario.categoria)%}
+                    <span class="label label-important">{{ form_errors(formulario.categoria) }} </span>
+                {%endif%}
+            </div>
+            <div class="span2">
+                {{ form_label(formulario.precio) }}
+                {{ form_widget(formulario.precio,{ 'attr': { 'style': 'height: auto; padding: 7px 9px; font-size: 16px;', 'class': 'span12' } })}}                
+                {%if form_errors(formulario.precio)%}
+                    <span class="label label-important">{{ form_errors(formulario.precio) }} </span>
+                {%endif%}
+            </div>
+            <div class="span2">
+                {{ form_label(formulario.moneda) }}
+                {{ form_widget(formulario.moneda,{ 'attr': { 'style': 'height: auto; padding: 7px 9px; font-size: 16px;', 'class': 'span12' } })}}
+                {%if form_errors(formulario.moneda)%}
+                    <span class="label label-important">{{ form_errors(formulario.moneda) }} </span>
+                {%endif%}
+            </div>
+        </div>        
+        <div class="row-fluid">
+            <div class="span5">
+                {{ form_label(formulario.asunto) }}                
+                {{ form_widget(formulario.asunto,{ 'attr': { 'style': 'height: auto; padding: 7px 9px; font-size: 16px;', 'class': 'span12' } })}}                
+                {%if form_errors(formulario.asunto)%}
+                    <span class="label label-important">{{ form_errors(formulario.asunto) }} </span>
+                {%endif%}
+            </div>
+            <div class="span2">
+                {{ form_label(formulario.nombre) }}
+                {{ form_widget(formulario.nombre,{ 'attr': { 'style': 'height: auto; padding: 7px 9px; font-size: 16px;', 'class': 'span12' } })}}
+                {%if form_errors(formulario.nombre)%}
+                    <span class="label label-important">{{ form_errors(formulario.nombre) }} </span>
+                {%endif%}
+            </div>
+            <div class="span2">
+                {{ form_label(formulario.telefono) }}
+                {{ form_widget(formulario.telefono,{ 'attr': { 'style': 'height: auto; padding: 7px 9px; font-size: 16px;', 'class': 'span12' } })}}
+                {%if form_errors(formulario.telefono)%}
+                    <span class="label label-important">{{ form_errors(formulario.telefono) }} </span>
+                {%endif%}
+            </div>    
+        </div>
+        <div class="row-fluid">
+            <div class="span9">
+                {{ form_label(formulario.descripcion) }}                
+                {{ form_widget(formulario.descripcion,{ 'attr': { 'style': 'height: 150px; padding: 7px 9px; font-size: 16px; resize: none', 'class': 'span12'} })}}                
+                {%if form_errors(formulario.descripcion)%}
+                    <span class="label label-important">{{ form_errors(formulario.descripcion) }} </span>
+                {%endif%}
+            </div>
+        </div>        
+        {%if (form_errors(formulario))%}    
+            <div id="img-error">
+               <span class="label label-important"> {{ form_errors(formulario) }} </span>            
+            </div>
+        {%endif%}
+        {%if accion == 'Editar'%}    
+            <div class="row-fluid">
+                <p style="font-size: 12px"><strong style="color: red;">Nota:</strong> Si alguna de las imagenes actules es modificada, se perderan las imagenes anteriores.</p>
+            </div>
+        {%endif%}
+        <div class="row-fluid">           
+            {%for img in formulario.imagenes%}
+                <div class="span3">                
+                    <label>Imagen {{ loop.index }}:</label>
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                            <img src="{{asset('bundles/frontend/img/anuncios/')}}{{(imagenesViejas[loop.index0] is defined)? imagenesViejas[loop.index0].imagen:'sin-img-prev.gif'}}">
+                        </div>
+                        <div class="fileupload-preview fileupload-exists thumbnail" style="width: 200px; height: 150px; line-height: 20px;"></div>
+                        <div>
+                            <span class="btn btn-file">
+                                <span class="fileupload-new">Selecionar</span>
+                                <span class="fileupload-exists">Cambiar</span>
+                                {{ form_widget(img.imagen)}}
+                                </span>
+                                <a class="btn fileupload-exists" data-dismiss="fileupload" href="#">Eliminar</a>
+                        </div>
+                    </div>                    
+                </div>            
+            {%endfor%}    
+        </div>            
+        <div class="row-fluid">
+            <input class="btn btn-primary" style="font-size: 16px; width: 100px; height: 35px;" type="submit" value="{{ accion=='Nuevo' ? 'Adicionar' : 'Guardar' }}" />
+        </div>
+        {{form_rest(formulario)}}
+    </form>
+{%endblock%}
+{%block javascripts%}
+    {{parent()}}
+    <script src="{{asset('bundles/frontend/js/bootstrap-fileupload.min.js')}}"></script>
+{%endblock%}

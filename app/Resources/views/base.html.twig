@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title 'Anuncios' %}</title>
+        <link href="{{asset('bundles/frontend/css/bootstrap.css')}}" type="text/css" rel="stylesheet"/>                
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" href="{{ asset('anuncios.jpg') }}" />
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{asset('bundles/frontend/js/jquery.js')}}"></script>
+            <script src="{{asset('bundles/frontend/js/bootstrap.min.js')}}"></script>
+        {% endblock %}
+        {#    <div style="position: fixed; bottom: 0; text-align: center; width: 100%">
+            <hr>
+            <p>© MYWS {{'now'|date('Y')}}</p>
+        </div>#}
+    </body>
+</html>

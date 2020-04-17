@@ -1,0 +1,14 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: anuncios
+    database_user: root
+    database_password: rootpassword
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: es
+    secret: 69f1014b910cfd01a2cdb8742eb20eb35b
+    database_path: null

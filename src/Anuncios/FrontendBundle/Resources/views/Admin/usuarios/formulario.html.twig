@@ -1,0 +1,50 @@
+{%extends 'FrontendBundle::layoutAdmin.html.twig'%}   
+{% block stylesheets %}
+    {{parent()}}
+    <style>        
+        span ul{
+            margin: 0 0 0 15px;
+        }  
+    </style>
+{%endblock%}
+{%block contenido%}
+    <form class="form-horizontal" action="{{ accion == 'Nuevo' ? path('admin_usuario_nuevo') : path('admin_usuario_editar', {'id': idUsuario}) }}" method="post" {{ form_enctype(formulario) }} >    
+        <div class="control-group">
+            <div class="control-label">
+                {{ form_label(formulario.username) }}
+            </div>						
+            <div class="controls">
+                {{ form_widget(formulario.username,{ 'attr': { 'style': 'height: auto; padding: 7px 9px; font-size: 16px; width: 280px' } })}}                     
+                {%if form_errors(formulario.username)%}
+                     <span class="label label-important"> {{ form_errors(formulario.username) }} </span>
+                {%endif%}                 
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="control-label">
+                {{ form_label(formulario.password.first) }}
+            </div>						
+            <div class="controls">
+                {{ form_widget(formulario.password.first,{ 'attr': { 'style': 'height: auto; padding: 7px 9px; font-size: 16px; width: 280px' } })}}                     
+                {%if form_errors(formulario.password.first)%}
+                     <span class="label label-important"> {{ form_errors(formulario.password.first) }} </span>
+                {%endif%}                 
+            </div>
+        </div>   
+        <div class="control-group">
+            <div class="control-label">
+                {{ form_label(formulario.password.second) }}
+            </div>						
+            <div class="controls">
+                {{ form_widget(formulario.password.second,{ 'attr': { 'style': 'height: auto; padding: 7px 9px; font-size: 16px; width: 280px' } })}}                     
+                {%if form_errors(formulario.password.second)%}
+                     <span class="label label-important"> {{ form_errors(formulario.password.second) }} </span>
+                {%endif%}                 
+            </div>
+        </div>      
+        <div class="controls">
+            <input class="btn btn-primary" style="font-size: 16px; width: 100px; height: 35px;" type="submit" value="{{ accion=='Nuevo' ? 'Adicionar' : 'Guardar' }}" />
+        </div>
+        {{form_rest(formulario)}}
+    </form>
+{%endblock%}

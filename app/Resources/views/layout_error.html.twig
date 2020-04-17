@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Se ha producido un error{% endblock %}
+{% block body %}        
+    <div class="container" style="margin-top: 5%">           
+        {% if exception.message %}
+            <h1 style="text-align: center" >{{ exception.message }}</h1>
+        {% else %}
+            <h1 style="text-align: center">No se ha encontrado la página solicitada <span>({% block error '' %})</span></h1>
+        {% endif %}
+            <div style="text-align: center">
+        <p>La mayoría de errores son temporales, provocados por pequeños cambios y actualizaciones del sitio web.</p>
+        <p>Prueba a actualizar la página dentro de unos minutos y seguramente podrás acceder a la página solicitada.
+            Si el error persiste, te agradeceríamos que nos reportaras personalmente.</p>
+        <a href="#" class="btn" onclick="goBack()">Regresar</a> 
+            </div>
+            
+    </div>
+{% endblock %}
+{%block javascripts%}
+    {{parent()}}
+    <script>
+      function goBack(){
+        window.history.back();        
+      }
+</script>
+{%endblock%}

@@ -1,0 +1,39 @@
+{%extends 'FrontendBundle::layoutAdmin.html.twig'%}   
+{% block stylesheets %}
+    {{parent()}}    
+    <style>        
+        span ul{
+            margin: 0 0 0 15px;
+        }  
+    </style>
+{%endblock%}
+{%block contenido%}
+    <form class="form-horizontal" action="{{ accion == 'Nuevo' ? path('admin_categoria_nuevo') : path('admin_categoria_editar', {'slug': slug}) }}" method="post" {{ form_enctype(formulario) }} >    
+        <div class="control-group">
+            <div class="control-label">
+                {{ form_label(formulario.categoria) }}
+            </div>						
+            <div class="controls">
+                {{ form_widget(formulario.categoria,{ 'attr': { 'style': 'height: auto; padding: 7px 9px; font-size: 16px; width: 280px' } })}}                     
+                {%if form_errors(formulario.categoria)%}
+                     <span class="label label-important"> {{ form_errors(formulario.categoria) }} </span>
+                {%endif%}                 
+            </div>
+        </div>  
+        <div class="control-group">
+            <div class="control-label">
+                {{ form_label(formulario.prioridad) }}
+            </div>						
+            <div class="controls">
+                {{ form_widget(formulario.prioridad,{ 'attr': { 'style': 'height: auto; padding: 7px 9px; font-size: 16px; width: 280px' } })}}                     
+                {%if form_errors(formulario.prioridad)%}
+                     <span class="label label-important"> {{ form_errors(formulario.prioridad) }} </span>
+                {%endif%}                 
+            </div>
+        </div>    
+        <div class="controls">
+            <input class="btn btn-primary" style="font-size: 16px; width: 100px; height: 35px;" type="submit" value="{{ accion=='Nuevo' ? 'Adicionar' : 'Guardar' }}" />
+        </div>
+        {{form_rest(formulario)}}
+    </form>
+{%endblock%}

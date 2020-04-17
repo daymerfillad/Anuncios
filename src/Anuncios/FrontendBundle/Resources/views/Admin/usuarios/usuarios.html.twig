@@ -1,0 +1,36 @@
+{%extends 'FrontendBundle::layoutAdmin.html.twig'%}   
+{%block contenido%}
+    <a href="{{path('admin_usuario_nuevo')}}" class="btn btn-small btn-primary">Nuevo usuario</a>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Activado</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for usuario in usuarios%}
+                <tr>                    
+                    <td>{{usuario.username}}</td>
+                    <td>{{usuario.activado?'Si':'No'}}</td>
+                    <td>                        
+                        {%if usuario.activado%}
+                            <a href="{{path('admin_usuario_desactivar',{'id':usuario.id})}}" title="Desactivar" class="icon-remove"></a>
+                        {%else%}    
+                            <a href="{{path('admin_usuario_activar',{'id':usuario.id})}}" title="Activar" class="icon-ok"></a>
+                        {%endif%}    
+                        <a href="{{path('admin_usuario_editar',{'id':usuario.id})}}" title="Editar" class="icon-edit"></a>
+                        <a href="{{path('admin_usuario_eliminar',{'id':usuario.id})}}" title="Eliminar" class="icon-trash"></a>    
+                    </td>
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+{%endblock%}
+{%block javascripts%}
+    {{parent()}}
+    <script>
+        $('td a').tooltip();        
+    </script>
+{%endblock%}

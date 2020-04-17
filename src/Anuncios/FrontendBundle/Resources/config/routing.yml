@@ -1,0 +1,95 @@
+#rutas admin
+admin_categoria:
+    pattern:  /admin/categorias/
+    defaults: { _controller: FrontendBundle:Admin:categorias }
+    
+admin_categoria_nuevo:
+    pattern:  /admin/categorias/nueva/
+    defaults: { _controller: FrontendBundle:Admin:categoriaNueva }     
+
+admin_categoria_editar:
+    pattern:  /admin/categorias/editar/{slug}/
+    defaults: { _controller: FrontendBundle:Admin:categoriaEditar } 
+    
+admin_categoria_eliminar:
+    pattern:  /admin/categorias/eliminar/{slug}/
+    defaults: { _controller: FrontendBundle:Admin:categoriaEliminar }    
+    
+admin_usuario:
+    pattern:  /admin/usuarios/
+    defaults: { _controller: FrontendBundle:Admin:usuarios }
+    
+admin_usuario_nuevo:
+    pattern:  /admin/usuarios/nuevo/
+    defaults: { _controller: FrontendBundle:Admin:usuarioNuevo } 
+ 
+admin_usuario_editar:
+    pattern:  /admin/usuarios/editar/{id}/
+    defaults: { _controller: FrontendBundle:Admin:usuarioEditar }
+    
+admin_usuario_eliminar:
+    pattern:  /admin/usuarios/eliminar/{id}/
+    defaults: { _controller: FrontendBundle:Admin:usuarioEliminar }    
+    
+admin_usuario_activar:
+    pattern:  /admin/usuarios/activar/{id}/
+    defaults: { _controller: FrontendBundle:Admin:usuarioActivar }
+    
+admin_usuario_desactivar:
+    pattern:  /admin/usuarios/desactivar/{id}/
+    defaults: { _controller: FrontendBundle:Admin:usuarioDesactivar }    
+
+#otras    
+homepage:
+    pattern:  /
+    defaults: { _controller: FrontendBundle:Anuncios:inicio }
+
+#rutas anuncios
+anuncios_buscar_en_categoria:
+    pattern:  /categoria/{categoria}/buscar/
+    defaults: { _controller: FrontendBundle:Anuncios:buscarEnCategoria }
+    
+anuncios_buscar:
+    pattern:  /buscar/
+    defaults: { _controller: FrontendBundle:Anuncios:buscar } 
+    
+anuncios_ultimos:
+    pattern:  /ultimos/
+    defaults: { _controller: FrontendBundle:Anuncios:ultimosAnuncios } 
+    
+anuncios:
+    pattern:  /categoria/{categoria}/
+    defaults: { _controller: FrontendBundle:Anuncios:anuncios }    
+
+anuncios_usuario:
+    pattern:  /anuncios/
+    defaults: { _controller: FrontendBundle:Anuncios:anunciosUsuario }  
+    
+anuncio_nuevo:
+    pattern:  /anuncios/nuevo/
+    defaults: { _controller: FrontendBundle:Anuncios:anuncioNuevo }  
+    
+anuncio_editar:
+    pattern:  /anuncios/editar/{slugAnuncio}/
+    defaults: { _controller: FrontendBundle:Anuncios:anuncioEditar } 
+    
+anuncio_eliminar:
+    pattern:  /anuncios/eliminar/{slugAnuncio}/
+    defaults: { _controller: FrontendBundle:Anuncios:anuncioEliminar }     
+
+anuncio_detalles:
+    pattern:  /categoria/{slugCategoria}/{slugAnuncio}/
+    defaults: { _controller: FrontendBundle:Anuncios:anuncioDetalles }     
+    
+#rutas Login  
+autenticarse:
+    pattern:  /autenticarse/
+    defaults: { _controller: FrontendBundle:Anuncios:autenticarse }      
+  
+login_check:
+    pattern:   /login_check/
+    
+logout:
+    pattern:   /salir/
+    
+   

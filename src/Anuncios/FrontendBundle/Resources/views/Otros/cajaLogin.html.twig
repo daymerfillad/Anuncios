@@ -1,0 +1,20 @@
+{% if is_granted('ROLE_USER')%}
+    <div class="btn-group pull-right">
+        <a class="btn" href="#"><i class="icon-user"></i> {{app.user.username}}</a>
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            {% if is_granted('ROLE_ADMIN')%}
+                <li><a href="{{path('admin_categoria')}}"><i class="icon-tasks"></i> Categorias</a></li>
+                <li><a href="{{path('admin_usuario')}}"><i class="icon-user"></i> Usuarios</a></li>                
+            {%endif%}
+            <li><a href="{{path('anuncios_usuario')}}"><i class="icon-bullhorn"></i> Anuncios</a></li>
+            <li><a href="{{path('logout')}}"><i class="icon-off"></i> Salir</a></li>                                
+        </ul>
+    </div>
+{%else%}
+    <form class="navbar-form pull-right" action="{{ path('login_check') }}" method="post">
+        <input class="span2" type="text" placeholder="Usuario" name="_username">
+        <input class="span2" type="password" placeholder="Contraseña" name="_password">
+        <button type="submit" class="btn">Entrar</button>
+    </form>
+{%endif%}

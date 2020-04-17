@@ -1,0 +1,10 @@
+<ul class="nav nav-list bs-docs-sidenav" style="margin: 0">    
+    {%for categoria in categorias %}
+        <li id="m_{{categoria.slug}}">
+        <a href="{{path('anuncios',{'categoria':categoria.slug})}}">
+            <i class="icon-chevron-right"></i>
+            {{categoria.categoria}}
+        </a>
+    </li>           
+    {%endfor%}     
+</ul>

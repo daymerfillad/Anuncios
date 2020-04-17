@@ -1,0 +1,31 @@
+{%extends 'FrontendBundle::layoutAdmin.html.twig'%}
+{%block contenido%}
+    <a href="{{path('admin_categoria_nuevo')}}" class="btn btn-small btn-primary">Nueva categoria</a>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Prioridad</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for categoria in categorias%}
+                <tr>
+                    <td>{{categoria.categoria}}</td>
+                    <td>{{categoria.prioridad}}</td>
+                    <td>
+                        <a href="{{path('admin_categoria_editar',{'slug':categoria.slug})}}" title="Editar" class="icon-edit"></a>
+                        <a href="{{path('admin_categoria_eliminar',{'slug':categoria.slug})}}" title="Eliminar" class="icon-trash"></a>
+                    </td>
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+{%endblock%}
+{%block javascripts%}
+    {{parent()}}
+    <script>
+        $('td a').tooltip();        
+    </script>
+{%endblock%}

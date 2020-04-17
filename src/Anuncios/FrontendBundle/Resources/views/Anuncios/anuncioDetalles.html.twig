@@ -1,0 +1,27 @@
+{%extends 'FrontendBundle::layoutAdmin.html.twig'%}   
+{%block stylesheets%}
+    {{parent()}}
+    <style>
+        #img > a:hover{
+            text-decoration: none;              
+        }            
+    </style>
+{%endblock%}
+{%block contenido%}
+    <h2>{{anuncio.asunto}}</h2>            
+    <div id="img" style="text-align: center">
+        {%for imagen in anuncio.imagenes%} 
+            <a href="{{asset('bundles/frontend/img/anuncios/')}}{{imagen.imagen}}">
+                <img src="{{asset('bundles/frontend/img/anuncios/')}}{{imagen.imagen}}" style="height: 100px; width: 100px" class="img-polaroid">              
+            </a>
+        {%else%}    
+            <h4>Este anuncio no contiene ninguna imagen.</h4>
+        {%endfor%}        
+    </div>    
+    <div style="float: left; margin-right: 20px">Precio: <strong style="color: red"> {{anuncio.precio}} {{anuncio.moneda}}</strong></div>
+    <p>Publicado el {{anuncio.fecha|date('d/m/Y g:i a')}}</p>
+    <hr style="margin: 2px 0 -8px" class="span12">
+    <p>{{anuncio.descripcion?anuncio.descripcion:'Este anuncio no contiene ninguna descripción.'}}</p>
+    <strong>Nombre:</strong> {{anuncio.nombre}} <br>
+    <strong>Teléfono:</strong> {{anuncio.telefono}}
+{%endblock%}
